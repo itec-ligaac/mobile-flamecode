@@ -28,9 +28,11 @@ class UserPreferenceFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_user_preference, container, false)
 
         val finnishButton = view.findViewById<Button>(R.id.finnishButton)
+
+        createUser()
+
         finnishButton.setOnClickListener {
 
-            // createUser()
             fragmentManager?.let { it1 -> FragmentManager(it1).moveToNextFragment(MainFragment()) }
         }
 

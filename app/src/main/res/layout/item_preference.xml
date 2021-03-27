@@ -21,6 +21,8 @@
         <ImageView
             android:id="@+id/firstImage"
             android:layout_width="45dp"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_height="45dp"/>
 
         <TextView
@@ -28,6 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/raleway_bold"
             android:textColor="@color/white"/>
 
@@ -48,12 +52,16 @@
         <ImageView
             android:id="@+id/secondImage"
             android:layout_width="45dp"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_height="45dp"/>
 
         <TextView
             android:id="@+id/secondText"
             android:layout_width="wrap_content"
             android:textAlignment="center"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_height="wrap_content"
             android:fontFamily="@font/raleway_bold"
             android:textColor="@color/white"/>

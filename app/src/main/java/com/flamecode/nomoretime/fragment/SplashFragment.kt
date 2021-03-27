@@ -30,14 +30,6 @@ class SplashFragment : Fragment() {
 
         getData(view)
 
-//        Thread{
-//            Thread.sleep(2000)
-//            Toast.makeText(context, "Move", Toast.LENGTH_SHORT).show()
-//        }
-//
-//        val t = Thread()
-//        t.join()
-
         return view
     }
 
@@ -63,16 +55,12 @@ class SplashFragment : Fragment() {
                 if(allDataCollected()){
                     com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!).moveToNextFragment(HomeFragment())
                 } else {
-                    com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!).moveToNextFragment(UserPreferenceFragment())
+                    com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!).moveToNextFragment(MainFragment())
                 }
             }
-
             override fun onAnimationRepeat(animation: Animation?) {
             }
         })
-
-
-
     }
 
     fun allDataCollected() : Boolean{

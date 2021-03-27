@@ -6,12 +6,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.flamecode.nomoretime.R
+import com.flamecode.nomoretime.database.LocalStorage
 
 class PreferenceListBuilder(private val context: Context) {
 
     fun create(first: Pair<String, Int>, second: Pair<String, Int>) : View{
 
         val mainView = View.inflate(context, R.layout.item_preference, null)
+
+        val localStorage = LocalStorage(context)
 
         val firstImage = mainView.findViewById<ImageView>(R.id.firstImage)
         val firstText = mainView.findViewById<TextView>(R.id.firstText)
@@ -24,6 +27,62 @@ class PreferenceListBuilder(private val context: Context) {
 
         secondText.text = second.first
         secondImage.setImageResource(second.second)
+
+        firstText.setOnClickListener {
+
+            val alpha = if (it.alpha == 1f){
+                0.5f
+            } else {
+                1f
+            }
+
+            it.animate().alpha(alpha)
+            firstImage.animate().alpha(alpha)
+
+            localStorage.setUserInterest(firstText.text.toString())
+        }
+
+        firstImage.setOnClickListener {
+
+            val alpha = if (it.alpha == 1f){
+                0.5f
+            } else {
+                1f
+            }
+
+            it.animate().alpha(alpha)
+            firstText.animate().alpha(alpha)
+
+            localStorage.setUserInterest(firstText.text.toString())
+        }
+
+        secondText.setOnClickListener {
+
+            val alpha = if (it.alpha == 1f){
+                0.5f
+            } else {
+                1f
+            }
+
+            it.animate().alpha(alpha)
+            secondImage.animate().alpha(alpha)
+
+            localStorage.setUserInterest(secondText.text.toString())
+        }
+
+        secondImage.setOnClickListener {
+
+            val alpha = if (it.alpha == 1f){
+                0.5f
+            } else {
+                1f
+            }
+
+            it.animate().alpha(alpha).startDelay = 100L
+            secondText.animate().alpha(alpha).startDelay = 100L
+
+            localStorage.setUserInterest(secondText.text.toString())
+        }
 
         return mainView
     }

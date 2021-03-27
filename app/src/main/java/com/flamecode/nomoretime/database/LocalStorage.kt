@@ -2,6 +2,7 @@ package com.flamecode.nomoretime.database
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.flamecode.nomoretime.model.User
 import com.flamecode.nomoretime.util.getRandomString
 
@@ -39,6 +40,25 @@ class LocalStorage(private val appContext: Context) {
 
             null
         }
+    }
+
+    fun setUserInterest(interest : String) {
+
+        initSharedPreference()
+        val sharedPrefEditor = sharedPreferences.edit()
+
+        val mutableSet = getUserListOfInterests()
+        mutableSet?.add(interest)
+        sharedPrefEditor.putStringSet(getUser()?.id + "interest", mutableSet)
+        sharedPrefEditor.apply()
+
+        Log.d("getUserListOfInterests", "" + sharedPreferences.getStringSet(getUser()?.id+ "interest", mutableSetOf()))
+    }
+
+    fun getUserListOfInterests() : MutableSet<String>? {
+
+        initSharedPreference()
+        return sharedPreferences.getStringSet(getUser()?.id + "interest", mutableSetOf())
     }
 
     fun createUser() : User {
