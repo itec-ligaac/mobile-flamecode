@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/NoMoreTime.iml" filepath="$PROJECT_DIR$/.idea/modules/NoMoreTime.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/NoMoreTime.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/NoMoreTime.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/mobile-flamecode.NoMoreTime.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/mobile-flamecode.NoMoreTime.app.iml" />
     </modules>
   </component>
 </project>
