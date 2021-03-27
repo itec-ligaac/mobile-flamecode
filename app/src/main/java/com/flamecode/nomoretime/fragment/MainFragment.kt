@@ -29,8 +29,9 @@ class MainFragment : Fragment() {
 
         val viewpager: ViewPager2 = view.findViewById(R.id.viewpager2)
         viewpager.offscreenPageLimit = 3
-        viewpager.adapter = activity?.let { DotIndicatorAdapter(it) }
+        viewpager.adapter = activity?.let { DotIndicatorAdapter(viewpager, it) }
         viewpager.currentItem = 1
+//        viewpager.isUserInputEnabled = false
 
         val circleIndicator3 = view.findViewById<CircleIndicator3>(R.id.indicator)
         circleIndicator3.setViewPager(viewpager)
