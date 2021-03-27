@@ -10,9 +10,14 @@ import android.widget.Button
 import android.widget.TextView
 import com.flamecode.nomoretime.R
 import com.flamecode.nomoretime.database.LocalStorage
+import com.flamecode.nomoretime.manager.FragmentManager
 
 class UserPreferenceFragment : Fragment() {
 
+    companion object {
+
+        const val ANIM_DELAY = 100L
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +29,8 @@ class UserPreferenceFragment : Fragment() {
         val finnishButton = view.findViewById<Button>(R.id.finnishButton)
         finnishButton.setOnClickListener {
 
-            createUser()
+            // createUser()
+            fragmentManager?.let { it1 -> FragmentManager(it1).moveToNextFragment(MainFragment()) }
         }
 
         initAnim(view, finnishButton)
@@ -46,9 +52,9 @@ class UserPreferenceFragment : Fragment() {
         val content = view.findViewById<TextView>(R.id.content)
 
         t1.animate().alpha(1f)
-        t2.animate().alpha(1f).startDelay = 100L
-        t3.animate().alpha(1f).startDelay = 150L
-        content.animate().alpha(1f).startDelay = 200L
-        finnishButton.animate().alpha(1f).startDelay = 250L
+        t2.animate().alpha(1f).startDelay = ANIM_DELAY
+        t3.animate().alpha(1f).startDelay = ANIM_DELAY * 2
+        content.animate().alpha(1f).startDelay = ANIM_DELAY * 3
+        finnishButton.animate().alpha(1f).startDelay = ANIM_DELAY * 4
     }
 }
