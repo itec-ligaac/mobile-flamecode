@@ -18,6 +18,7 @@
 
 
     <TextView
+        android:id="@+id/hi_sonia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hi, there! \n I'm Sonia and I want to help you"
@@ -29,5 +30,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ask_sonia_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/hi_sonia"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="60dp"
+        />
+
+    <ImageView
+        android:id="@+id/send_message"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_send"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@id/hi_sonia"/>
+
+    
+    <TextView
+        android:id="@+id/sonia_answear_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/send_message"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:background="@drawable/sonia_message_bg"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
