@@ -30,11 +30,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-}
 
-repositories {
-    flatDir{
-        dirs 'libs'
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 
@@ -53,6 +53,8 @@ dependencies {
 
     // Dot Bottom Nav
     implementation 'me.relex:circleindicator:2.1.6'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     implementation(name:'HERE-sdk', ext:'aar')
     implementation 'org.locationtech.jts:jts-core:1.15.0'
