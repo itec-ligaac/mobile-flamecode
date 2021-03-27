@@ -32,6 +32,12 @@ android {
     }
 }
 
+repositories {
+    flatDir{
+        dirs 'libs'
+    }
+}
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -47,4 +53,8 @@ dependencies {
 
     // Dot Bottom Nav
     implementation 'me.relex:circleindicator:2.1.6'
+
+    implementation(name:'HERE-sdk', ext:'aar')
+    implementation 'org.locationtech.jts:jts-core:1.15.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
