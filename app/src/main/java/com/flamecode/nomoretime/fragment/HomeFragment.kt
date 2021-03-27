@@ -1,6 +1,7 @@
 package com.flamecode.nomoretime.fragment
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PointF
 import android.os.Bundle
@@ -33,6 +34,7 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
     }
 
     private var map: Map? = null
+    lateinit var mapFragment : AndroidXMapFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,95 +43,19 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val mapFragment = AndroidXMapFragment()
+        mapFragment = AndroidXMapFragment()
         val fm: FragmentManager = childFragmentManager
         val ft: FragmentTransaction = fm.beginTransaction()
         ft.replace(R.id.simpleFrameLayout, mapFragment).commit()
 
         mapFragment.init(ApplicationContext(context!!)) { error ->
+
             if (error == OnEngineInitListener.Error.NONE) {
 
                 // retrieve a reference of the map from the map fragment
                 map = mapFragment.map
-                map?.setZoomLevel(ZOOM_LEVEL, Map.Animation.LINEAR)
-                setUserLocation()
-
-               // map?.mapScheme = map?.mapSchemes!![0]
-
-                mapFragment.mapGesture?.addOnGestureListener(object : MapGesture.OnGestureListener {
-                    override fun onPanStart() {
-                        Log.d("mapGesture", "onPanStart")
-
-                        viewPager2.isUserInputEnabled = false
-                    }
-
-                    override fun onPanEnd() {
-                        Log.d("mapGesture", "onPanEnd")
-                        viewPager2.isUserInputEnabled = true
-                    }
-
-                    override fun onMultiFingerManipulationStart() {
-                        Log.d("mapGesture", "onMultiFingerManipulationStart")
-                    }
-
-                    override fun onMultiFingerManipulationEnd() {
-                        Log.d("mapGesture", "onMultiFingerManipulationEnd")
-                    }
-
-                    override fun onMapObjectsSelected(p0: MutableList<ViewObject>): Boolean {
-                        Log.d("mapGesture", "onMapObjectsSelected")
-                        return true
-                    }
-
-                    override fun onTapEvent(p0: PointF): Boolean {
-                        Log.d("mapGesture", "onTapEvent")
-                        return false
-                    }
-
-                    override fun onDoubleTapEvent(p0: PointF): Boolean {
-                        Log.d("mapGesture", "onDoubleTapEvent")
-                        return true
-                    }
-
-                    override fun onPinchLocked() {
-                        Log.d("mapGesture", "onPinchLocked")
-                    }
-
-                    override fun onPinchZoomEvent(p0: Float, p1: PointF): Boolean {
-                        Log.d("mapGesture", "onPinchZoomEvent")
-                        return false
-                    }
-
-                    override fun onRotateLocked() {
-                        Log.d("mapGesture", "onRotateLocked")
-                    }
-
-                    override fun onRotateEvent(p0: Float): Boolean {
-                        Log.d("mapGesture", "onRotateEvent")
-                        return true
-                    }
-
-                    override fun onTiltEvent(p0: Float): Boolean {
-                        Log.d("mapGesture", "onTiltEvent")
-
-                        return false
-                    }
-
-                    override fun onLongPressEvent(p0: PointF): Boolean {
-                        Log.d("mapGesture", "onLongPressEvent")
-                        return false
-                    }
-
-                    override fun onLongPressRelease() {
-                        Log.d("mapGesture", "onLongPressRelease")
-                    }
-
-                    override fun onTwoFingerTapEvent(p0: PointF): Boolean {
-                        Log.d("mapGesture", "onTwoFingerTapEvent")
-                        return true
-                    }
-
-                }, 1, true)
+                configureMap()
+                addGestureListenerForMap()
 
             } else {
                 Log.e("TAG", "ERROR: Cannot initialize Map Fragment: " + error.stackTrace)
@@ -137,6 +63,25 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
         }
 
         return view
+    }
+
+    private fun configureMap() {
+
+        map?.setZoomLevel(ZOOM_LEVEL, Map.Animation.LINEAR)
+        setUserLocation()
+        map?.mapScheme = map?.mapSchemes!![1] // NIGHT MODE FOR MAP
+    }
+
+    override fun onResume() {
+
+        super.onResume()
+        mapFragment.onResume()
+    }
+
+    override fun onPause() {
+
+        super.onPause()
+        mapFragment.onPause()
     }
 
     private fun setUserLocation() {
@@ -167,4 +112,107 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
             )
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (requestCode == TAG_CODE_PERMISSION_LOCATION) {
+
+            val geoLocator = GeoLocator(context, activity)
+            map?.setCenter(
+                GeoCoordinate(geoLocator.lattitude,
+                    geoLocator.longitude), Map.Animation.LINEAR)
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        Log.d("TAG", "onRequestPermissionsResult")
+    }
+
+    private fun addGestureListenerForMap() {
+
+        mapFragment.mapGesture?.addOnGestureListener(object : MapGesture.OnGestureListener {
+            override fun onPanStart() {
+                Log.d("mapGesture", "onPanStart")
+
+                viewPager2.isUserInputEnabled = false
+            }
+
+            override fun onPanEnd() {
+                Log.d("mapGesture", "onPanEnd")
+                viewPager2.isUserInputEnabled = true
+            }
+
+            override fun onMultiFingerManipulationStart() {
+                Log.d("mapGesture", "onMultiFingerManipulationStart")
+                viewPager2.isUserInputEnabled = false
+            }
+
+            override fun onMultiFingerManipulationEnd() {
+                Log.d("mapGesture", "onMultiFingerManipulationEnd")
+                viewPager2.isUserInputEnabled = true
+            }
+
+            override fun onMapObjectsSelected(p0: MutableList<ViewObject>): Boolean {
+                Log.d("mapGesture", "onMapObjectsSelected")
+                return true
+            }
+
+            override fun onTapEvent(p0: PointF): Boolean {
+                Log.d("mapGesture", "onTapEvent")
+                return false
+            }
+
+            override fun onDoubleTapEvent(p0: PointF): Boolean {
+                Log.d("mapGesture", "onDoubleTapEvent")
+                return true
+            }
+
+            override fun onPinchLocked() {
+                Log.d("mapGesture", "onPinchLocked")
+            }
+
+            override fun onPinchZoomEvent(p0: Float, p1: PointF): Boolean {
+                Log.d("mapGesture", "onPinchZoomEvent")
+                return false
+            }
+
+            override fun onRotateLocked() {
+                Log.d("mapGesture", "onRotateLocked")
+            }
+
+            override fun onRotateEvent(p0: Float): Boolean {
+                Log.d("mapGesture", "onRotateEvent")
+                return true
+            }
+
+            override fun onTiltEvent(p0: Float): Boolean {
+                Log.d("mapGesture", "onTiltEvent")
+                return false
+            }
+
+            override fun onLongPressEvent(p0: PointF): Boolean {
+                Log.d("mapGesture", "onLongPressEvent")
+                return false
+            }
+
+            override fun onLongPressRelease() {
+                Log.d("mapGesture", "onLongPressRelease")
+            }
+
+            override fun onTwoFingerTapEvent(p0: PointF): Boolean {
+                Log.d("mapGesture", "onTwoFingerTapEvent")
+                return true
+            }
+
+        }, 1, true)
+    }
+
 }
