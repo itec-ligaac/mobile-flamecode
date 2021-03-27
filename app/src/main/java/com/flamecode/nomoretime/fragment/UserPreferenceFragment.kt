@@ -40,9 +40,9 @@ class UserPreferenceFragment : Fragment() {
 
     private fun initAnim(view: View, finnishButton: Button) {
 
-        val t1 = view.findViewById<TextureView>(R.id.t1)
-        val t2 = view.findViewById<TextureView>(R.id.t2)
-        val t3 = view.findViewById<TextureView>(R.id.t3)
+        val t1 = view.findViewById<TextView>(R.id.t1)
+        val t2 = view.findViewById<TextView>(R.id.t2)
+        val t3 = view.findViewById<TextView>(R.id.t3)
         val content = view.findViewById<TextView>(R.id.content)
 
         t1.animate().alpha(1f)
