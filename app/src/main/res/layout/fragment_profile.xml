@@ -1,60 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@color/dark_grey"
     tools:context=".fragment.ProfileFragment">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="97dp"
-        android:layout_height="96dp"
-        android:src="@drawable/ic_left"
-        android:layout_marginTop="80dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/img_profile"
         app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:fontFamily="@font/raleway_bold"
-        android:textSize="20dp"
-        android:text="User Name"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="NewUser"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_image"
-        />
-
-    <TextView
-        android:id="@+id/created_acc_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:fontFamily="@font/raleway_thin"
-        android:textSize="16dp"
-        android:text="10.03.1707"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_name"
-        />
-
+        app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
     <View
         android:id="@+id/rect_shape_prf"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="280dp"
-        android:background="@drawable/profile_shape"
-        />
+        android:background="@drawable/profile_shape" />
 
     <LinearLayout
         android:id="@+id/frames"
@@ -67,37 +49,34 @@
             android:id="@+id/frame_visited"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_weight="0.3"
             android:layout_margin="10dp"
-            android:elevation="20dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/rounded_rectangle"
             android:clickable="true"
-            android:focusable="true"
-            android:background="@drawable/rounded_rectangle"/>
-
-
+            android:elevation="20dp"
+            android:focusable="true" />
 
         <FrameLayout
             android:id="@+id/frame_routes"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_weight="0.3"
             android:layout_margin="10dp"
-            android:elevation="20dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/rounded_rectangle"
             android:clickable="true"
-            android:focusable="true"
-            android:background="@drawable/rounded_rectangle"/>
-
+            android:elevation="20dp"
+            android:focusable="true" />
 
         <FrameLayout
             android:id="@+id/frame_places"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_weight="0.3"
             android:layout_margin="10dp"
-            android:elevation="20dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/rounded_rectangle"
             android:clickable="true"
-            android:focusable="true"
-            android:background="@drawable/rounded_rectangle"/>
+            android:elevation="20dp"
+            android:focusable="true" />
 
     </LinearLayout>
 
@@ -105,9 +84,9 @@
         android:id="@+id/icons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:elevation="20dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
+        android:elevation="20dp"
         android:focusable="true"
         app:layout_constraintTop_toTopOf="@+id/rect_shape_prf">
 
@@ -115,88 +94,89 @@
             android:id="@+id/img_visited"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_weight="0.3"
-            android:elevation="20dp"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_marginTop="30dp"
-            android:src="@drawable/ic_history"/>
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:focusable="true"
+            android:src="@drawable/ic_taj_mahal" />
 
         <ImageView
             android:id="@+id/img_routes"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="0.3"
-            android:elevation="20dp"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_marginTop="30dp"
-            android:src="@drawable/ic_location"/>
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:focusable="true"
+            android:src="@drawable/ic_location" />
 
         <ImageView
             android:id="@+id/img_places"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="0.3"
-            android:elevation="20dp"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_marginTop="30dp"
-            android:src="@drawable/ic_bookmark"/>
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:focusable="true"
+            android:src="@drawable/ic_bookmark" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="20dp"
         android:clickable="true"
+        android:elevation="20dp"
         android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@+id/frames">
+        app:layout_constraintTop_toBottomOf="@+id/icons">
 
         <TextView
             android:id="@+id/text_visited"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:elevation="20dp"
-            android:text="Visited places"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_gravity="center"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:textSize="14sp"
+            android:focusable="true"
+            android:fontFamily="@font/raleway_bold"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:fontFamily="@font/raleway_thin"
-            android:src="@drawable/ic_history"/>
+            android:src="@drawable/ic_history"
+            android:text="Visited places"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/text_routes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:elevation="20dp"
-            android:text="Calculated routes"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_gravity="center"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:focusable="true"
+            android:fontFamily="@font/raleway_bold"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:fontFamily="@font/raleway_thin"
-            android:src="@drawable/ic_delivery"/>
+            android:src="@drawable/ic_delivery"
+            android:text="Calculated \n routes"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/text_places"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:elevation="20dp"
-            android:text="Places bookmarks"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_gravity="center"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:focusable="true"
+            android:fontFamily="@font/raleway_bold"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:fontFamily="@font/raleway_thin"
-            android:src="@drawable/ic_bookmark"/>
+            android:src="@drawable/ic_bookmark"
+            android:text="Places \n bookmarks"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -204,9 +184,9 @@
         android:id="@+id/ask_sonia_btn"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_marginBottom="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/ask_sonia_shape_profile"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -214,24 +194,25 @@
         android:id="@+id/ask_sonia_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:fontFamily="@font/raleway_extrabold"
         android:text="Have a question? \n       Ask Sonia"
-        android:fontFamily="@font/raleway_semibold"
-        app:layout_constraintTop_toTopOf="@+id/ask_sonia_btn"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/ask_sonia_btn"
+        app:layout_constraintEnd_toEndOf="@+id/ask_sonia_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ask_sonia_btn"/>
+        app:layout_constraintTop_toTopOf="@+id/ask_sonia_btn" />
 
     <ImageView
         android:id="@+id/ask_sonia_ic"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/raleway_semibold"
-        android:background="@drawable/ic_conversation"
         android:layout_marginEnd="10dp"
-        app:layout_constraintTop_toTopOf="@+id/ask_sonia_btn"
+        android:background="@drawable/ic_conversation"
+        android:fontFamily="@font/raleway_semibold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/ask_sonia_btn"
-        app:layout_constraintEnd_toEndOf="@+id/ask_sonia_btn"/>
+        app:layout_constraintEnd_toEndOf="@+id/ask_sonia_btn"
+        app:layout_constraintTop_toTopOf="@+id/ask_sonia_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
