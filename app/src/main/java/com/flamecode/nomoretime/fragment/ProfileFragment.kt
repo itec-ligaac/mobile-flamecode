@@ -1,5 +1,6 @@
 package com.flamecode.nomoretime.fragment
 
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.flamecode.nomoretime.R
+import com.flamecode.nomoretime.ai.SoniaFragment
 import com.flamecode.nomoretime.manager.FragmentManager
 
 class ProfileFragment : Fragment() {
@@ -24,6 +26,10 @@ class ProfileFragment : Fragment() {
     private lateinit var routesFrame : FrameLayout
     private lateinit var routesImage : ImageView
     private lateinit var routesText : TextView
+
+    private lateinit var askSoniaTv : TextView
+    private lateinit var askSoniaIc : ImageView
+    private lateinit var askSoniaBg : ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +56,10 @@ class ProfileFragment : Fragment() {
         routesImage = view.findViewById(R.id.img_routes)
         routesText = view.findViewById(R.id.text_routes)
 
+        askSoniaBg = view.findViewById(R.id.ask_sonia_btn)
+        askSoniaIc = view.findViewById(R.id.ask_sonia_ic)
+        askSoniaTv = view.findViewById(R.id.ask_sonia_tv)
+
         onClickListeners()
     }
 
@@ -65,7 +75,13 @@ class ProfileFragment : Fragment() {
         routesText.setOnClickListener { openRoutesFragment() }
         routesImage.setOnClickListener { openRoutesFragment() }
         routesText.setOnClickListener { openRoutesFragment() }
+
+        askSoniaBg.setOnClickListener { openSoniaFragment() }
+        askSoniaIc.setOnClickListener { openSoniaFragment() }
+        askSoniaTv.setOnClickListener { openSoniaFragment() }
     }
+
+    private fun openSoniaFragment() { FragmentManager(fragmentManager!!).moveToNextFragment(SoniaFragment()) }
 
     private fun openRoutesFragment() { FragmentManager(fragmentManager!!).moveToNextFragment(RoutesFragment()) }
 
