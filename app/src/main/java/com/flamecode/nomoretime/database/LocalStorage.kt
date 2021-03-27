@@ -45,8 +45,12 @@ class LocalStorage(private val appContext: Context) {
 
         initSharedPreference()
         val sharedPrefEditor = sharedPreferences.edit()
+
+        sharedPrefEditor.putBoolean(USER_DATABASE_EXIST, true)
+
         val newId = getRandomString(SIZE_USER_ID)
         sharedPrefEditor.putString(USER_DATABASE, newId)
+
         sharedPrefEditor.apply()
 
         return User(id = newId)
