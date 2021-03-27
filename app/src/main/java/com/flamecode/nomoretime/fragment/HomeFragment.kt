@@ -78,7 +78,7 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
 
     private fun setHome(actualLocation: GeoCoordinate) {
         val img = Image()
-        val decodeResource = BitmapFactory.decodeResource(resources, R.drawable.ic_img_location)
+        val decodeResource = BitmapFactory.decodeResource(resources, R.drawable.home_location)
         img.setBitmap(
             Bitmap.createScaledBitmap(
                 decodeResource, 100, 100,
