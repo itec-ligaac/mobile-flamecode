@@ -10,6 +10,6 @@ enum class TypesOfSearch(val type : String) {
     COFFEE_TEA("coffee-tea"),
     HOTELS("accommodations"),
     NATURAL("natural and geographical"),
-    MUSEUMS("Sights and Museums")
+    MUSEUMS("sights and museums")
 
 }

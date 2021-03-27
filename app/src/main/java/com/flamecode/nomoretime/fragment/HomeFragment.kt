@@ -3,7 +3,6 @@ package com.flamecode.nomoretime.fragment
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PointF
@@ -12,6 +11,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -19,6 +21,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.flamecode.nomoretime.R
+import com.flamecode.nomoretime.map.CreateMapObject
 import com.flamecode.nomoretime.map.SearchRequestMap
 import com.here.android.mpa.common.*
 import com.here.android.mpa.mapping.AndroidXMapFragment
@@ -33,6 +36,7 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
 
         const val TAG_CODE_PERMISSION_LOCATION = 11113
         const val ZOOM_LEVEL = 14.0
+        const val DURATION = 300L
     }
 
     private var map: Map? = null
@@ -44,6 +48,127 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        searchFooter(view)
+
+        initMapService()
+
+        return view
+    }
+
+    private fun searchFooter(view: View) {
+
+        val searchLayout = view.findViewById<ConstraintLayout>(R.id.searchLayout)
+        val searchImageView = view.findViewById<ImageView>(R.id.searchImageView)
+        val searchEditText = view.findViewById<EditText>(R.id.searchEditText)
+        val searchLayoutSecond = view.findViewById<ConstraintLayout>(R.id.searchLayoutSecond)
+        val searchImageViewSecond = view.findViewById<ImageView>(R.id.searchImageViewSecond)
+
+        animClickListenersFooter(
+            searchLayout,
+            searchEditText,
+            searchLayoutSecond,
+            searchImageViewSecond,
+            searchImageView
+        )
+
+        searchLayoutSecond.setOnClickListener(searchPlacesOnClickListener(searchEditText))
+        searchImageViewSecond.setOnClickListener(searchPlacesOnClickListener(searchEditText))
+    }
+
+    private fun searchPlacesOnClickListener(editText: EditText) : View.OnClickListener{
+
+        val geoLocator = GeoLocator(context, activity)
+        val contextView = editText.context
+
+        return View.OnClickListener {
+
+            map?.let { it1 ->
+                context?.let { it2 ->
+                    SearchRequestMap().search(
+                        it1, it2, GeoCoordinate(geoLocator.lattitude, geoLocator.longitude),
+                        search = editText.text.toString())
+                }
+            }
+        }
+    }
+
+    private fun animClickListenersFooter(
+        searchLayout: ConstraintLayout,
+        searchEditText: EditText,
+        searchLayoutSecond: ConstraintLayout,
+        searchImageViewSecond: ImageView,
+        searchImageView: ImageView
+    ) {
+
+        searchLayout.setOnClickListener {
+
+            firstAnimFooter(searchLayout, searchEditText, searchLayoutSecond, searchImageViewSecond)
+        }
+
+        searchImageView.setOnClickListener {
+
+            firstAnimFooter(searchLayout, searchEditText, searchLayoutSecond, searchImageViewSecond)
+        }
+
+        searchLayoutSecond.setOnLongClickListener {
+
+            secondAnimFooter(
+                searchLayout,
+                searchEditText,
+                searchLayoutSecond,
+                searchImageViewSecond
+            )
+        }
+
+        searchImageViewSecond.setOnLongClickListener {
+
+            secondAnimFooter(
+                searchLayout,
+                searchEditText,
+                searchLayoutSecond,
+                searchImageViewSecond
+            )
+        }
+    }
+
+    private fun secondAnimFooter(
+        searchLayout: ConstraintLayout,
+        searchEditText: EditText,
+        searchLayoutSecond: ConstraintLayout,
+        searchImageViewSecond: ImageView
+    ): Boolean {
+
+        searchLayout.animate().alpha(1f).setDuration(DURATION)
+            .withEndAction { searchLayout.visibility = View.VISIBLE }
+        searchEditText.animate().alpha(0f).setDuration(DURATION)
+            .withStartAction { searchEditText.visibility = View.GONE }
+        searchLayoutSecond.animate().alpha(0f).setDuration(DURATION)
+            .withStartAction { searchLayoutSecond.visibility = View.GONE }
+        searchImageViewSecond.animate().alpha(0f).setDuration(DURATION)
+            .withStartAction { searchLayoutSecond.visibility = View.GONE }
+
+        return true
+    }
+
+    private fun firstAnimFooter(
+        searchLayout: ConstraintLayout,
+        searchEditText: EditText,
+        searchLayoutSecond: ConstraintLayout,
+        searchImageViewSecond: ImageView
+    ) {
+
+        searchLayout.animate().alpha(0f).setDuration(DURATION)
+            .withEndAction { searchLayout.visibility = View.GONE }
+        searchEditText.animate().alpha(1f).setDuration(DURATION)
+            .withStartAction { searchEditText.visibility = View.VISIBLE }
+        searchLayoutSecond.animate().alpha(1f).setDuration(DURATION)
+            .withStartAction { searchLayoutSecond.visibility = View.VISIBLE }
+        searchImageViewSecond.animate().alpha(1f).setDuration(DURATION)
+            .withStartAction { searchLayoutSecond.visibility = View.VISIBLE }
+    }
+
+    private fun initMapService() {
 
         mapFragment = AndroidXMapFragment()
         val fm: FragmentManager = childFragmentManager
@@ -58,7 +183,7 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
                 map = mapFragment.map
                 configureMap()
                 addGestureListenerForMap()
-             //   SearchRequestMap().search()
+                //   SearchRequestMap().search()
 
                 val geoLocator = GeoLocator(context, activity)
                 val actualLocation = GeoCoordinate(
@@ -72,11 +197,10 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
                 Log.e("TAG", "ERROR: Cannot initialize Map Fragment: " + error.stackTrace)
             }
         }
-
-        return view
     }
 
     private fun setHome(actualLocation: GeoCoordinate) {
+
         val img = Image()
         val decodeResource = BitmapFactory.decodeResource(resources, R.drawable.home_location)
         img.setBitmap(
