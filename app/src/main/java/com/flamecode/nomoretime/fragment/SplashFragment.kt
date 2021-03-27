@@ -1,20 +1,19 @@
 package com.flamecode.nomoretime.fragment
 
-import android.media.Image
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.flamecode.nomoretime.R
 
 class SplashFragment : Fragment() {
-
-    private lateinit var pulseAnimation : Animation
 
 
     override fun onCreateView(
@@ -30,10 +29,18 @@ class SplashFragment : Fragment() {
     }
 
     private fun getData(view: View) {
-        var appImage  = view.findViewById<ImageView>(R.id.app_icon)
-        var appName = view.findViewById<TextView>(R.id.app_name)
+        val appImage  = view.findViewById<ImageView>(R.id.app_icon)
+        val appName = view.findViewById<TextView>(R.id.app_name)
         val pulseAnimation : Animation = AnimationUtils.loadAnimation(context, R.anim.pulse)
         appImage.startAnimation(pulseAnimation)
-        appImage.startAnimation(pulseAnimation)
+
+
+        val fadeIn = AlphaAnimation(0f, 1f)
+        fadeIn.interpolator = DecelerateInterpolator()
+        fadeIn.duration = 1500
+        appName.animation = fadeIn
+
     }
+
+
 }
