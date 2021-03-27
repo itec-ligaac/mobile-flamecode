@@ -2,7 +2,9 @@ package com.flamecode.nomoretime.database
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.flamecode.nomoretime.model.User
+import com.flamecode.nomoretime.util.getRandomString
 
 /**
  * For saving easy t
@@ -19,15 +21,14 @@ class LocalStorage(private val appContext: Context) {
 
         const val USER_DATABASE_EXIST = "USER_DATABASE_EXIST"
         const val USER_DATABASE = "USER_DATABASE"
+        const val SIZE_USER_ID = 10
     }
 
     private lateinit var sharedPreferences: SharedPreferences
 
     fun getUser(): User? {
 
-        val localClassNameFromActivity = "MainActivity"
-        sharedPreferences = appContext.getSharedPreferences(localClassNameFromActivity,
-                Context.MODE_PRIVATE)
+        initSharedPreference()
 
         val existUserOnThisDevice = sharedPreferences.getBoolean(USER_DATABASE_EXIST, false)
 
@@ -36,7 +37,26 @@ class LocalStorage(private val appContext: Context) {
             sharedPreferences.getString(USER_DATABASE, "")?.let { User(it) }
 
         } else {
+
             null
         }
+    }
+
+    fun createUser() : User {
+
+        initSharedPreference()
+        val sharedPrefEditor = sharedPreferences.edit()
+        val newId = getRandomString(SIZE_USER_ID)
+        sharedPrefEditor.putString(USER_DATABASE, newId)
+        sharedPrefEditor.apply()
+
+        return User(id = newId)
+    }
+
+    private fun initSharedPreference() {
+
+        val localClassNameFromActivity = "MainActivity"
+        sharedPreferences = appContext.getSharedPreferences(localClassNameFromActivity,
+                Context.MODE_PRIVATE)
     }
 }
