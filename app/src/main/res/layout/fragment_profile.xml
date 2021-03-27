@@ -7,15 +7,16 @@
     android:background="@color/dark_grey"
     tools:context=".fragment.ProfileFragment">
 
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="100dp"
         android:src="@drawable/img_profile"
+        app:civ_border_color="@color/grey"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -185,10 +186,23 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/ask_sonia_shape_profile"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/sonia_bot"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/ic_bot_sonia"
+        android:fontFamily="@font/raleway_semibold"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ask_sonia_btn"
+        app:layout_constraintStart_toStartOf="@+id/ask_sonia_btn"
+        app:layout_constraintTop_toTopOf="@+id/ask_sonia_btn" />
 
     <TextView
         android:id="@+id/ask_sonia_tv"
@@ -199,14 +213,14 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/ask_sonia_btn"
-        app:layout_constraintEnd_toEndOf="@+id/ask_sonia_btn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ask_sonia_btn" />
 
     <ImageView
         android:id="@+id/ask_sonia_ic"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/ic_conversation"
         android:fontFamily="@font/raleway_semibold"
