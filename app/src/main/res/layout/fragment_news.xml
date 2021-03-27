@@ -11,7 +11,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="News"
+        android:text="@string/news"
         android:fontFamily="@font/raleway_bold"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -44,7 +44,7 @@
         android:padding="10dp"
         android:textSize="15sp"
         android:fontFamily="@font/raleway_light"
-        android:text="Mount Everest is Earth's highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. Its elevation of 8,848.86 m was most recently established in 2020 by the Nepali and Chinese authorities."
+        android:text="@string/mount_everest_is_earth_s_highest_mountain_above_sea_level_located_in_the_mahalangur_himal_sub_range_of_the_himalayas_the_china_nepal_border_runs_across_its_summit_point_its_elevation_of_8_848_86_m_was_most_recently_established_in_2020_by_the_nepali_and_chinese_authorities"
         app:layout_constraintTop_toBottomOf="@id/image"
         />
 
@@ -52,7 +52,7 @@
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
-        android:text="Get location"
+        android:text="@string/get_location"
         android:textAllCaps="false"
         android:fontFamily="@font/raleway_regular"
         android:background="@drawable/question_btn_bg_ai"
