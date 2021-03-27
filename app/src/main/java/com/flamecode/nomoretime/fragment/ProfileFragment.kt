@@ -81,11 +81,11 @@ class ProfileFragment : Fragment() {
         askSoniaTv.setOnClickListener { openSoniaFragment() }
     }
 
-    private fun openSoniaFragment() { FragmentManager(fragmentManager!!).moveToNextFragment(SoniaFragment()) }
+    private fun openSoniaFragment() { FragmentManager(fragmentManager!!).addFragment(SoniaFragment()) }
 
-    private fun openRoutesFragment() { FragmentManager(fragmentManager!!).moveToNextFragment(RoutesFragment()) }
+    private fun openRoutesFragment() { FragmentManager(fragmentManager!!).addFragment(RoutesFragment()) }
 
-    private fun openPlacesFragment() { FragmentManager(fragmentManager!!).moveToNextFragment(VisitedHistoryFragment()) }
+    private fun openPlacesFragment() { FragmentManager(fragmentManager!!).addFragment(VisitedHistoryFragment()) }
 
-    private fun openVisitedFragment() { FragmentManager(fragmentManager!!).moveToNextFragment(BookmarkFragment()) }
+    private fun openVisitedFragment() { FragmentManager(fragmentManager!!).addFragment(BookmarkFragment()) }
 }

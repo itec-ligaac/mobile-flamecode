@@ -28,7 +28,7 @@ class VisitedHistoryFragment : Fragment() {
 
     private fun getData(view: View) {
         val goBack = view.findViewById<Button>(R.id.go_back)
-        goBack.setOnClickListener { FragmentManager(fragmentManager!!).moveToNextFragment(MainFragment()) }
+        goBack.setOnClickListener { FragmentManager(fragmentManager!!).goBack(MainFragment()) }
     }
 
 
