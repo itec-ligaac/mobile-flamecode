@@ -2,7 +2,6 @@ package com.flamecode.nomoretime.database
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.core.content.edit
 import com.flamecode.nomoretime.model.User
 import com.flamecode.nomoretime.util.getRandomString
 
