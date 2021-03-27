@@ -1,29 +1,35 @@
 package com.flamecode.nomoretime.fragment
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.PointF
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.flamecode.nomoretime.R
 import com.here.android.mpa.common.ApplicationContext
+import com.here.android.mpa.common.GeoCoordinate
 import com.here.android.mpa.common.OnEngineInitListener
 import com.here.android.mpa.common.ViewObject
 import com.here.android.mpa.mapping.AndroidXMapFragment
 import com.here.android.mpa.mapping.Map
 import com.here.android.mpa.mapping.MapGesture
+import com.location.aravind.getlocation.GeoLocator
 
-
-class HomeFragment(private val viewPager2 : ViewPager2) : Fragment() {
+class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
 
     companion object {
 
-        var onTouch = false
+        const val TAG_CODE_PERMISSION_LOCATION = 11113
+        const val ZOOM_LEVEL = 14.0
     }
 
     private var map: Map? = null
@@ -36,7 +42,7 @@ class HomeFragment(private val viewPager2 : ViewPager2) : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         val mapFragment = AndroidXMapFragment()
-        val fm: FragmentManager = fragmentManager!!
+        val fm: FragmentManager = childFragmentManager
         val ft: FragmentTransaction = fm.beginTransaction()
         ft.replace(R.id.simpleFrameLayout, mapFragment).commit()
 
@@ -45,9 +51,14 @@ class HomeFragment(private val viewPager2 : ViewPager2) : Fragment() {
 
                 // retrieve a reference of the map from the map fragment
                 map = mapFragment.map
+                map?.setZoomLevel(ZOOM_LEVEL, Map.Animation.LINEAR)
+                setUserLocation()
+
+               // map?.mapScheme = map?.mapSchemes!![0]
+
                 mapFragment.mapGesture?.addOnGestureListener(object : MapGesture.OnGestureListener {
                     override fun onPanStart() {
-                    Log.d("mapGesture", "onPanStart")
+                        Log.d("mapGesture", "onPanStart")
 
                         viewPager2.isUserInputEnabled = false
                     }
@@ -128,4 +139,32 @@ class HomeFragment(private val viewPager2 : ViewPager2) : Fragment() {
         return view
     }
 
+    private fun setUserLocation() {
+
+        if (ContextCompat.checkSelfPermission(
+                activity!!,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) ==
+            PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(
+                activity!!,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) ==
+            PackageManager.PERMISSION_GRANTED) {
+
+            val geoLocator = GeoLocator(context, activity)
+            map?.setCenter(
+                GeoCoordinate(geoLocator.lattitude,
+                    geoLocator.longitude), Map.Animation.LINEAR)
+
+        } else {
+            ActivityCompat.requestPermissions(
+                activity!!, arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                TAG_CODE_PERMISSION_LOCATION
+            )
+        }
+    }
 }
