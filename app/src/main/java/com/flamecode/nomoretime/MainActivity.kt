@@ -39,41 +39,4 @@ class MainActivity : AppCompatActivity() {
 
         FragmentManager(supportFragmentManager).moveToNextFragment(SplashFragment())
     }
-
-    private fun initMapEngine() {
-        val diskCacheRoot: String = Environment.getExternalStorageDirectory()
-            .getPath() + File.separator.toString() + ".isolated-here-maps"
-        var intentName = ""
-        try {
-            val ai: ApplicationInfo = this.packageManager
-                .getApplicationInfo(this.packageName, PackageManager.GET_META_DATA)
-            val bundle = ai.metaData
-            intentName = bundle.getString("INTENT_NAME")!!
-        } catch (e: PackageManager.NameNotFoundException) {
-            Log.e(
-                this.javaClass.toString(),
-                "Failed to find intent name, NameNotFound: " + e.message
-            )
-        }
-        val success = MapSettings.setIsolatedDiskCacheRootPath(diskCacheRoot)
-        if (!success) {
-        } else {
-            MapEngine.getInstance().init(
-                ApplicationContext(this)
-            ) { error -> //Here is
-                Log.e(
-                    "TAG",
-                    "Map Engine initialized with error code: $error"
-                )
-                Toast.makeText(
-                    this,
-                    "Map Engine initialized with error code:$error",
-                    Toast.LENGTH_SHORT
-                ).show()
-                if (error == OnEngineInitListener.Error.NONE) {
-                   // getCoordinatesForAddress(mAddress)
-                }
-            }
-        }
-    }
 }
