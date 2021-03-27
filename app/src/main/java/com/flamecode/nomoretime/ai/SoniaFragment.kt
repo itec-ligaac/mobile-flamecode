@@ -54,7 +54,7 @@ class SoniaFragment : Fragment() {
     private fun getAnswear(view: View): String {
         val editText = view.findViewById<EditText>(R.id.ask_sonia_et)
 
-        val questionStr = editText.text.toString().trim()
+        val questionStr = editText.text.toString().toLowerCase().trim()
 
         val restaurantX = 300
         val restaurantY = 400
