@@ -19,6 +19,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -54,9 +55,10 @@ dependencies {
     // Dot Bottom Nav
     implementation 'me.relex:circleindicator:2.1.6'
 
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+//    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude : ['*mock*.jar'])
 
-    implementation(name:'HERE-sdk', ext:'aar')
+    // implementation(name:'HERE-sdk', ext:'aar')
     implementation 'org.locationtech.jts:jts-core:1.15.0'
     implementation 'com.google.code.gson:gson:2.8.6'
 }
