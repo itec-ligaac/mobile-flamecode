@@ -17,8 +17,8 @@ import com.flamecode.nomoretime.database.LocalStorage
 class SplashFragment : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_splash, container, false)
@@ -29,6 +29,7 @@ class SplashFragment : Fragment() {
     }
 
     private fun getData(view: View) {
+
         val appImage = view.findViewById<ImageView>(R.id.app_icon)
         val appName = view.findViewById<TextView>(R.id.app_name)
         val pulseAnimation: Animation = AnimationUtils.loadAnimation(context, R.anim.pulse)
@@ -48,9 +49,11 @@ class SplashFragment : Fragment() {
 
             override fun onAnimationEnd(animation: Animation?) {
                 if (allDataCollected()) {
-                    com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!).moveToNextFragment(MainFragment())
+                    com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!)
+                        .moveToNextFragment(MainFragment())
                 } else {
-                    com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!).moveToNextFragment(UserPreferenceFragment())
+                    com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!)
+                        .moveToNextFragment(UserPreferenceFragment())
                 }
             }
 
