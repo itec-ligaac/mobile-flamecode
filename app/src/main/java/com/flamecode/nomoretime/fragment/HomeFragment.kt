@@ -3,6 +3,9 @@ package com.flamecode.nomoretime.fragment
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.PointF
 import android.os.Bundle
 import android.util.Log
@@ -16,13 +19,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.flamecode.nomoretime.R
-import com.here.android.mpa.common.ApplicationContext
-import com.here.android.mpa.common.GeoCoordinate
-import com.here.android.mpa.common.OnEngineInitListener
-import com.here.android.mpa.common.ViewObject
+import com.flamecode.nomoretime.map.SearchRequestMap
+import com.here.android.mpa.common.*
 import com.here.android.mpa.mapping.AndroidXMapFragment
 import com.here.android.mpa.mapping.Map
 import com.here.android.mpa.mapping.MapGesture
+import com.here.android.mpa.mapping.MapMarker
 import com.location.aravind.getlocation.GeoLocator
 
 class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
@@ -56,6 +58,15 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
                 map = mapFragment.map
                 configureMap()
                 addGestureListenerForMap()
+             //   SearchRequestMap().search()
+
+                val geoLocator = GeoLocator(context, activity)
+                val actualLocation = GeoCoordinate(
+                    geoLocator.lattitude,
+                    geoLocator.longitude
+                )
+
+                setHome(actualLocation)
 
             } else {
                 Log.e("TAG", "ERROR: Cannot initialize Map Fragment: " + error.stackTrace)
@@ -65,10 +76,24 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
         return view
     }
 
+    private fun setHome(actualLocation: GeoCoordinate) {
+        val img = Image()
+        val decodeResource = BitmapFactory.decodeResource(resources, R.drawable.home_location)
+        img.setBitmap(
+            Bitmap.createScaledBitmap(
+                decodeResource, 100, 100,
+                false
+            )
+        )
+
+        map?.addMapObject(MapMarker(actualLocation, img))
+    }
+
     private fun configureMap() {
 
         map?.setZoomLevel(ZOOM_LEVEL, Map.Animation.LINEAR)
         setUserLocation()
+        map?.setLandmarksVisible(true)
         map?.mapScheme = map?.mapSchemes!![1] // NIGHT MODE FOR MAP
     }
 
@@ -98,9 +123,13 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
             PackageManager.PERMISSION_GRANTED) {
 
             val geoLocator = GeoLocator(context, activity)
+            val actualLocation = GeoCoordinate(
+                geoLocator.lattitude,
+                geoLocator.longitude
+            )
+
             map?.setCenter(
-                GeoCoordinate(geoLocator.lattitude,
-                    geoLocator.longitude), Map.Animation.LINEAR)
+                actualLocation, Map.Animation.LINEAR)
 
         } else {
             ActivityCompat.requestPermissions(
