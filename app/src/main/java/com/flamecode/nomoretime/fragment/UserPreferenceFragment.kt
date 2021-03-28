@@ -1,13 +1,13 @@
 package com.flamecode.nomoretime.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.flamecode.nomoretime.R
 import com.flamecode.nomoretime.database.LocalStorage
 import com.flamecode.nomoretime.manager.FragmentManager
@@ -21,8 +21,8 @@ class UserPreferenceFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_user_preference, container, false)
@@ -36,12 +36,18 @@ class UserPreferenceFragment : Fragment() {
             fragmentManager?.let { it1 -> FragmentManager(it1).moveToNextFragment(MainFragment()) }
         }
 
-        val list = listOf(Pair("Restaurant", R.drawable.ic_restaurant),
-                Pair("Coffee-Tea", R.drawable.ic_coffe), Pair("Entertainment", R.drawable.ic_cocktail),
-                Pair("Sights and Museums", R.drawable.ic_pantheon), Pair("Cinema", R.drawable.ic_popcorn),
-                Pair("Theatre and Music", R.drawable.ic_culture),
-                Pair("Natural and Geographical", R.drawable.ic_trees), Pair("Transport", R.drawable.ic_bus),
-                Pair("Accommodations", R.drawable.ic_hotel), Pair("Shopping", R.drawable.ic_online_shopping))
+        val list = listOf(
+            Pair("Restaurant", R.drawable.ic_restaurant),
+            Pair("Coffee-Tea", R.drawable.ic_coffe),
+            Pair("Entertainment", R.drawable.ic_cocktail),
+            Pair("Sights and Museums", R.drawable.ic_pantheon),
+            Pair("Cinema", R.drawable.ic_popcorn),
+            Pair("Theatre and Music", R.drawable.ic_culture),
+            Pair("Natural and Geographical", R.drawable.ic_trees),
+            Pair("Transport", R.drawable.ic_bus),
+            Pair("Accommodations", R.drawable.ic_hotel),
+            Pair("Shopping", R.drawable.ic_online_shopping)
+        )
 
         val listOfPreferences = view.findViewById<LinearLayout>(R.id.listOfPreferences)
 

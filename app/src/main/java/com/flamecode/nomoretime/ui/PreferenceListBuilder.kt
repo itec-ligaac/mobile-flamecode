@@ -3,11 +3,14 @@ package com.flamecode.nomoretime.ui
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.flamecode.nomoretime.R
 import com.flamecode.nomoretime.database.LocalStorage
 
+/**
+ * Builder for adding elements in list of preferences
+ *
+ */
 class PreferenceListBuilder(private val context: Context) {
 
     fun create(first: Pair<String, Int>, second: Pair<String, Int>) : View{

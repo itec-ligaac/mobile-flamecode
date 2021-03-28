@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.flamecode.nomoretime.R
-import com.flamecode.nomoretime.map.CreateMapObject
 import com.flamecode.nomoretime.map.SearchRequestMap
 import com.here.android.mpa.common.*
 import com.here.android.mpa.mapping.AndroidXMapFragment
@@ -79,9 +78,16 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
     private fun searchPlacesOnClickListener(editText: EditText) : View.OnClickListener{
 
         val geoLocator = GeoLocator(context, activity)
-        val contextView = editText.context
 
         return View.OnClickListener {
+
+            val actualLocation = GeoCoordinate(
+                geoLocator.lattitude,
+                geoLocator.longitude
+            )
+
+            map?.removeAllMapObjects()
+            setHome(actualLocation)
 
             map?.let { it1 ->
                 context?.let { it2 ->
@@ -367,5 +373,4 @@ class HomeFragment(private val viewPager2: ViewPager2) : Fragment() {
 
         }, 1, true)
     }
-
 }

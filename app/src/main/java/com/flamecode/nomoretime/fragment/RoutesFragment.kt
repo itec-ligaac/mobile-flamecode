@@ -1,7 +1,6 @@
 package com.flamecode.nomoretime.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.flamecode.nomoretime.R
 import com.flamecode.nomoretime.manager.FragmentManager
 import com.flamecode.nomoretime.map.TypesOfSearch
-import com.flamecode.nomoretime.util.HaversineAlgorithm
 import com.flamecode.nomoretime.util.HaversineInKM
 import com.here.android.mpa.common.GeoCoordinate
 import com.here.android.mpa.search.DiscoveryRequest
