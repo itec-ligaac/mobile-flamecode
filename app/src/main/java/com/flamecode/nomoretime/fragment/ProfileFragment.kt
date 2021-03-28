@@ -85,7 +85,7 @@ class ProfileFragment : Fragment() {
 
     private fun openRoutesFragment() { FragmentManager(fragmentManager!!).addFragment(RoutesFragment()) }
 
-    private fun openPlacesFragment() { FragmentManager(fragmentManager!!).addFragment(VisitedHistoryFragment()) }
+    private fun openPlacesFragment() { Toast.makeText(context, "Not yet implemented", Toast.LENGTH_LONG).show()}
 
-    private fun openVisitedFragment() { FragmentManager(fragmentManager!!).addFragment(BookmarkFragment()) }
+    private fun openVisitedFragment() { Toast.makeText(context, "Not yet implemented", Toast.LENGTH_LONG).show() }
 }

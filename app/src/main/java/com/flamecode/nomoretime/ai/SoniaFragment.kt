@@ -1,22 +1,20 @@
 package com.flamecode.nomoretime.ai
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.flamecode.nomoretime.R
-import com.flamecode.nomoretime.fragment.MainFragment
 import com.flamecode.nomoretime.manager.FragmentManager
-
+import com.flamecode.nomoretime.map.TypesOfSearch
+import com.here.android.mpa.common.GeoCoordinate
+import com.here.android.mpa.search.DiscoveryRequest
+import com.here.android.mpa.search.SearchRequest
+import java.util.*
 
 class SoniaFragment : Fragment() {
-
-
-    private lateinit var listView: ListView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,43 +36,35 @@ class SoniaFragment : Fragment() {
 
     private fun createSoniaAlgorithm(view: View) {
 
+        val answer = view.findViewById<TextView>(R.id.sonia_answear_tv)
 
         val askSoniaButton = view.findViewById<ImageView>(R.id.send_message)
-        val answear = view.findViewById<TextView>(R.id.sonia_answear_tv)
-        answear.visibility = View.INVISIBLE
+        answer.visibility = View.INVISIBLE
         askSoniaButton.setOnClickListener {
-            answear.visibility = View.VISIBLE
-            answear.text = getAnswear(view)
+
+            answer.visibility = View.VISIBLE
+           getAnswer(view)
         }
 
     }
 
-    private fun getAnswear(view: View): String {
+    private fun getAnswer(view: View): String {
+
+        val answer = view.findViewById<TextView>(R.id.sonia_answear_tv)
+
         val editText = view.findViewById<EditText>(R.id.ask_sonia_et)
-
-        val questionStr = editText.text.toString().toLowerCase().trim()
-
-        val restaurantX = 300
-        val restaurantY = 400
-
-        val museumX = 300
-        val museumY = 400
-
-        val theatreX = 300
-        val theatreY = 400
-
-
+        val questionStr = editText.text.toString().toLowerCase(Locale.ROOT).trim()
 
         val map = mapOf(
-            "restaurant" to "Most coordonates $restaurantX && $restaurantY"
-            , "sights" to "Most beautifull sights you can find at coordonates $restaurantX && $restaurantY"
-            , "museums" to "This museum is near to you at $museumX && $museumY"
-            , "theatre" to "The theatre is near to you at $theatreX && $theatreY"
-            , "pizza" to "You can order a pizza from $restaurantX && $restaurantY"
-            , "burgers" to "You can eat a burger at coordonates $restaurantX && $restaurantY"
-            , "dinner" to "You can take the dinner at $restaurantX && $restaurantY"
-            ,"coffee" to "It would be a pleasure to drink a cofee at $restaurantX && $restaurantY"
-            , "attraction" to "Some atractions are$restaurantX && $restaurantY"
+            "restaurant" to "The closest restaurant is"
+            , "sights" to "Most beautiful sights you can find at coordinates"
+            , "museums" to "This museum is near to you at"
+            , "theatre" to "The theatre is near to you at"
+            , "pizza" to "You can order a pizza from"
+            , "burgers" to "You can eat a burger at coordinates"
+            , "dinner" to "You can take the dinner at"
+            ,"coffee" to "It would be a pleasure to drink a cofee at"
+            , "attraction" to "Some attractions are"
         )
 
         val list = listOf("restaurant"
@@ -83,22 +73,53 @@ class SoniaFragment : Fragment() {
             , "theatre"
             , "pizza"
             , "burgers"
-            , "romantic dinner"
+            , "dinner"
             ,"coffee"
             , "attraction")
 
 
-        for(i in list){
-            Log.d("i", i)
-            if(questionStr.contains(i)){
-                return map[i].toString()
+        for(item in list) {
+
+            if(questionStr.contains(item)) {
+
+                uniqueSearch(search = item, answear = answer, additionalString = map[item].toString())
+
+                return item
             }
         }
 
-
-//        Log.d("asd", "${map[questionStr]}")
-//        if(map[questionStr]!=null) return  map[questionStr].toString()
         return "Please reformulate the sentence"
+    }
+
+    private fun uniqueSearch(
+        typesOfSearch: TypesOfSearch? = null,
+        search: String = "", answear : TextView, additionalString : String) {
+
+        val request: DiscoveryRequest = if(typesOfSearch!= null) {
+
+            SearchRequest(typesOfSearch.type).setSearchCenter(GeoCoordinate(0.0, 0.0))
+        } else {
+
+            val trim = search.decapitalize(Locale.getDefault()).trim()
+            SearchRequest(trim).setSearchCenter(GeoCoordinate(47.15, 27.5))
+        }
+
+        request.collectionSize = 1
+        request.execute { discoveryResultPage, errorCode ->
+
+            if (discoveryResultPage != null) {
+
+                for (link in discoveryResultPage.placeLinks) {
+
+                    val element = com.flamecode.nomoretime.model.Place(
+                        title = link.title, coord = link.position,
+                        distance = link.distance, category = link.category?.name
+                    )
+
+                    answear.text = additionalString + " at ${element.title} (lat = ${element.coord?.latitude} and  long = ${element.coord?.longitude})"
+                }
+            }
+        }
     }
 
 }
