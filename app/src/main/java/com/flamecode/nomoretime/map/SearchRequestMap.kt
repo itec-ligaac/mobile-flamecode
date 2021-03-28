@@ -5,7 +5,8 @@ import android.util.Log
 import com.flamecode.nomoretime.R
 import com.here.android.mpa.common.GeoCoordinate
 import com.here.android.mpa.mapping.Map
-import com.here.android.mpa.search.*
+import com.here.android.mpa.search.DiscoveryRequest
+import com.here.android.mpa.search.SearchRequest
 import java.util.*
 
 class SearchRequestMap {

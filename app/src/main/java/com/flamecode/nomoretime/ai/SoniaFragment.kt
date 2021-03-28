@@ -1,11 +1,14 @@
 package com.flamecode.nomoretime.ai
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.flamecode.nomoretime.R
 import com.flamecode.nomoretime.manager.FragmentManager
 import com.flamecode.nomoretime.map.TypesOfSearch
@@ -82,18 +85,18 @@ class SoniaFragment : Fragment() {
 
             if(questionStr.contains(item)) {
 
-                uniqueSearch(search = item, answear = answer, additionalString = map[item].toString())
+                uniqueSearch(search = item, answer = answer, additionalString = map[item].toString())
 
                 return item
             }
         }
 
-        return "Please reformulate the sentence"
+        return getString(R.string.please_reformultate_the_sentence)
     }
 
     private fun uniqueSearch(
         typesOfSearch: TypesOfSearch? = null,
-        search: String = "", answear : TextView, additionalString : String) {
+        search: String = "", answer : TextView, additionalString : String) {
 
         val request: DiscoveryRequest = if(typesOfSearch!= null) {
 
@@ -105,7 +108,7 @@ class SoniaFragment : Fragment() {
         }
 
         request.collectionSize = 1
-        request.execute { discoveryResultPage, errorCode ->
+        request.execute { discoveryResultPage, _ ->
 
             if (discoveryResultPage != null) {
 
@@ -116,7 +119,7 @@ class SoniaFragment : Fragment() {
                         distance = link.distance, category = link.category?.name
                     )
 
-                    answear.text = additionalString + " at ${element.title} (lat = ${element.coord?.latitude} and  long = ${element.coord?.longitude})"
+                    answer.text = additionalString + " at ${element.title} (lat = ${element.coord?.latitude} and  long = ${element.coord?.longitude})"
                 }
             }
         }

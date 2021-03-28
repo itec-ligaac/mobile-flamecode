@@ -7,7 +7,8 @@ import com.flamecode.nomoretime.model.User
 import com.flamecode.nomoretime.util.getRandomString
 
 /**
- * For saving easy t
+ * For saving easy the data in local storage (SharedPreference)
+ *
  */
 class LocalStorage(private val appContext: Context) {
 
@@ -55,7 +56,7 @@ class LocalStorage(private val appContext: Context) {
         Log.d("getUserListOfInterests", "" + sharedPreferences.getStringSet(getUser()?.id+ "interest", mutableSetOf()))
     }
 
-    fun getUserListOfInterests() : MutableSet<String>? {
+    private fun getUserListOfInterests() : MutableSet<String>? {
 
         initSharedPreference()
         return sharedPreferences.getStringSet(getUser()?.id + "interest", mutableSetOf())

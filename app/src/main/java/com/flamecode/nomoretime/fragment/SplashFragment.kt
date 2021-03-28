@@ -44,14 +44,16 @@ class SplashFragment : Fragment() {
 
 
         pulseAnimation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {
-            }
+            override fun onAnimationStart(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
+
                 if (allDataCollected()) {
+
                     com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!)
                         .moveToNextFragment(MainFragment())
                 } else {
+
                     com.flamecode.nomoretime.manager.FragmentManager(fragmentManager!!)
                         .moveToNextFragment(UserPreferenceFragment())
                 }
@@ -63,8 +65,7 @@ class SplashFragment : Fragment() {
     }
 
     fun allDataCollected(): Boolean {
+
         return LocalStorage(context!!).getUser() != null
     }
-
-
 }
