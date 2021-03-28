@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/pairPrefLinearLayout"
+    android:layout_width="match_parent"
+    android:weightSum="2"
+    android:layout_height="wrap_content"
+    android:paddingBottom="25dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/firstPairLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/round_rectangle_gray">
+
+        <ImageView
+            android:id="@+id/firstImage"
+            android:layout_width="45dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="45dp"/>
+
+        <TextView
+            android:id="@+id/firstText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondPairLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/round_rectangle_gray">
+
+        <ImageView
+            android:id="@+id/secondImage"
+            android:layout_width="45dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="45dp"/>
+
+        <TextView
+            android:id="@+id/secondText"
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

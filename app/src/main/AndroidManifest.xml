@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.flamecode.nomoretime">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="true"
+        android:theme="@style/Theme.NoMoreTime">
+
+        <meta-data android:name="com.here.android.maps.appid" android:value="T17KmfWxNTcnhibHHfFw"/>
+        <meta-data android:name="com.here.android.maps.apptoken" android:value="J139T3H1u9eKEafBFFAa9g"/>
+        <meta-data
+            android:name="com.here.android.maps.license.key"
+            android:value="RT9HzYw3yZrfkBuUBDFoMexy6Up3TZtCuxFzJUVYaczSQKzszv1I9+4x7OGmeYBI9u0DJQJ+ZjDU+MekHaxYnMlUFspKvZsfRpaOatclQckHbjjS8Yjgre0cBvC6rBtTiVtbBoWrXcdCSSlesMgPaNdGRvQ6lygXN+HPxc4aDWNWmryM5CHBVmdALutYBjnqG6mca05mslcWbMedpOKf51AhMDUGw0ajAGpcBCDqjbzrQG8OvrQ5NCVXx7RbWF4FixBAY052lwMcwNgnh4+0rhP55aJueEdnDjN/Z+xyxWFwR0qRDVckUF6ShTMk/7llARurLaP9vYk6MpODhFhqspuC5lkCWDs1TB/duaqJ7mc7vlR4uWTXvO9/OWiWsQCh0ywc5CbFxtMp7TV6fCsByna7zDLLDAMNArt/6WMUX+8VIVw1vd2+peZ6Q+ykYyBbaanFvQNUrjeCYk/KQNdrn6RNwq5dz13uQTqczcfe4NHIl5GNiHiGWDS4EPFoqyTcN7ZaQoqivhOfbzFAj7X9/VrmTA5OONT6QisDuhTKbfytG/6RDzG08DmjBb1vl7+fok1A+noCk+5tdqJbuci2MpFIJoShGFYfu97rRpWDCCCEyxnhRYluzTuQbByjByQbGEwzZZgDldJCGDFagzxA1LT3VVtPHQj1wa1kkSOMa0I=" />
+        <meta-data
+            android:name="INTENT_NAME"
+            android:value="HereMappingIntent" />
+
+        <service
+            android:name="com.here.android.mpa.service.MapService"
+            android:exported="false"
+            android:label="HereMapping">
+            <intent-filter>
+                <action android:name="HereMappingIntent" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">NoMoreTime</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mount_everest_is_earth_s_highest_mountain_above_sea_level_located_in_the_mahalangur_himal_sub_range_of_the_himalayas_the_china_nepal_border_runs_across_its_summit_point_its_elevation_of_8_848_86_m_was_most_recently_established_in_2020_by_the_nepali_and_chinese_authorities">Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. Its elevation of 8,848.86 m was most recently established in 2020 by the Nepali and Chinese authorities.</string>
+    <string name="get_location">Get location</string>
+    <string name="news">News</string>
+    <string name="hi_there_n_i_m_sonia_and_i_want_to_help_you">Hi, there! \n I\'m Sonia and I want to help you</string>
+    <string name="road">Road</string>
+    <string name="start_location">Start location</string>
+    <string name="finish_point">Finish point</string>
+    <string name="measure">Measure</string>
+    <string name="distance">Distance</string>
+    <string name="newuser">NewUser</string>
+    <string name="visited_places">Visited places</string>
+    <string name="calculated_n_routes">Calculated \n routes</string>
+    <string name="places_n_bookmarks">Places \n bookmarks</string>
+    <string name="have_a_question_n_ask_sonia">Have a question? \n Ask Sonia</string>
+    <string name="please_choose_your_area_of_interest">Please choose your area of interest</string>
+    <string name="finnish">Finnish</string>
+    <string name="hello">Hello</string>
+</resources>
