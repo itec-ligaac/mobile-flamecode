@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_bold"
-        android:text="NewUser"
+        android:text="@string/newuser"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -146,7 +146,7 @@
             android:fontFamily="@font/raleway_bold"
             android:gravity="center"
             android:src="@drawable/ic_history"
-            android:text="Visited places"
+            android:text="@string/visited_places"
             android:textColor="@color/white" />
 
         <TextView
@@ -161,7 +161,7 @@
             android:fontFamily="@font/raleway_bold"
             android:gravity="center"
             android:src="@drawable/ic_delivery"
-            android:text="Calculated \n routes"
+            android:text="@string/calculated_n_routes"
             android:textColor="@color/white" />
 
         <TextView
@@ -176,7 +176,7 @@
             android:fontFamily="@font/raleway_bold"
             android:gravity="center"
             android:src="@drawable/ic_bookmark"
-            android:text="Places \n bookmarks"
+            android:text="@string/places_n_bookmarks"
             android:textColor="@color/white" />
 
     </LinearLayout>
@@ -209,7 +209,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_extrabold"
-        android:text="Have a question? \n       Ask Sonia"
+        android:text="@string/have_a_question_n_ask_sonia"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/ask_sonia_btn"

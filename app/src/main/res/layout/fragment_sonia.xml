@@ -21,7 +21,7 @@
         android:id="@+id/hi_sonia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi, there! \n I'm Sonia and I want to help you"
+        android:text="@string/hi_there_n_i_m_sonia_and_i_want_to_help_you"
         android:textColor="@color/black"
         android:fontFamily="@font/raleway_bold"
         android:gravity="center"
