@@ -21,11 +21,10 @@ class SearchRequestMap {
             SearchRequest(trim).setSearchCenter(location)
         }
 
-        request.collectionSize = 5
+        request.collectionSize = 10
         request.execute { discoveryResultPage, errorCode ->
 
             val createMapObject = CreateMapObject()
-
 
             if (discoveryResultPage != null) {
 
